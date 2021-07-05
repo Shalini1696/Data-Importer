@@ -124,7 +124,7 @@ public inherited sharing class SObjectFieldsInfo {
 		Integer totalRecords = 0;
 		try{
 			if(idContentDocument != null) {
-				ContentVersion objVersion = [SELECT Id, VersionData FROM ContentVersion WHERE ContentDocumentId =: idContentDocument];
+				ContentVersion objVersion = [SELECT Id, VersionData FROM ContentVersion WHERE ContentDocumentId =: idContentDocument WITH SECURITY_ENFORCED];
 				List<String> csvLines = objVersion.VersionData.toString().split('\n');
 				List<String> fieldNamesInHeader =  csvLines[0].split(',');
 				Map <String, Schema.SObjectType> schemaMap = Schema.getGlobalDescribe();
