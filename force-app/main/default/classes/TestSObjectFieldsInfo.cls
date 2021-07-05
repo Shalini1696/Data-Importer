@@ -34,7 +34,7 @@ private class TestSObjectFieldsInfo{
 
 	static testMethod void validateFileParsing(){
 		ContentVersion contentVersion = [SELECT Id, ContentDocumentId, Title FROM ContentVersion WHERE Title='Account Insert'];
-		SObjectFieldsInfo.parseCSVFileData(contentVersion.ContentDocumentId, 'Account');	
+		SingleObjectDataCreation.parseCSVFileData(contentVersion.ContentDocumentId, 'Account');	
 		System.assertEquals('Account Insert',contentVersion.Title,'Content Doc');		
 	}
 
@@ -43,7 +43,7 @@ private class TestSObjectFieldsInfo{
 		List<SObject> objToCreate = new List<SObject>();
 		objToCreate.add(new Account(Name='Test Account 1', Type='Prospect', Website='http://myaccount.com'));
 		objToCreate.add(new Account(Name='Test Account 2', Type='Prospect', Website='http://myaccount.com'));
-		SObjectFieldsInfo.createDataForSObject(objToCreate, dataLoadProgress);
+		SingleObjectDataCreation.createDataForSObject(objToCreate, dataLoadProgress);
 		Account acc = [SELECT Id,Name,Type,Website FROM Account WHERE Name ='Test Account 1' LIMIT 1];
 		System.assertEquals('Prospect', acc.Type,'Inserted Account Type');
 		System.assertEquals('http://myaccount.com', acc.Website,'Inserted Account Website');
@@ -53,7 +53,7 @@ private class TestSObjectFieldsInfo{
 		List<String> dataLoadProgress = new List<String>{'1'};
       	List<SObject> objToCreate = new List<SObject>();
 		objToCreate.add(new Account(Type='Prospect'));
-		String[] results = SObjectFieldsInfo.createDataForSObject(objToCreate, dataLoadProgress);	
+		String[] results = SingleObjectDataCreation.createDataForSObject(objToCreate, dataLoadProgress);	
 		System.assertEquals(results[2],'1','Errored Account');
 	}
 }

@@ -1,5 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
-import parseCSVFileData from '@salesforce/apex/SObjectFieldsInfo.parseCSVFileData';
+import parseCSVFileData from '@salesforce/apex/SingleObjectDataCreation.parseCSVFileData';
 
 export default class newDataCreatorSO extends LightningElement {
 
