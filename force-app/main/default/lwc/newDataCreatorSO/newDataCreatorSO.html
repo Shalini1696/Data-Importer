@@ -1,0 +1,109 @@
+<template>
+    <lightning-card title="Apex Test Data Generator For Sandbox">
+        <div class="slds-p-around_medium">
+            <lightning-progress-indicator current-step={currentStep} type="path" variant="base">
+                <lightning-progress-step label="Object Type Selection" value="step-1"></lightning-progress-step>
+                <lightning-progress-step label="Object & Field Selection" value="step-2"></lightning-progress-step>
+
+                <template if:true={isParentChild}>
+                    <lightning-progress-step label="Related Object & Field Selection" value="step-2a">
+                    </lightning-progress-step>
+                </template>
+                <lightning-progress-step label="Upload File & Track Progress" value="step-3"></lightning-progress-step>
+            </lightning-progress-indicator>
+        </div>
+
+        <template if:true={validateStep1}>
+            <lightning-layout>
+                <lightning-layout-item padding="around-small" size="5">
+                    <lightning-radio-group name="radioGroup"
+                        label="Want To Create Data For Single/Both Parent & Child Object ?" options={options}
+                        value={selectedRadioButton} required type="radio" onchange={handleRadioButtonChange}>
+                    </lightning-radio-group>
+
+                </lightning-layout-item>
+            </lightning-layout>
+            <div class="slds-clearfix">
+                <div class="slds-align_absolute-center">
+                    <lightning-button class="slds-p-around_medium" disabled={disableNextButton1} variant="brand-outline"
+                        label="Next" title="Next" onclick={handleNext}>
+                    </lightning-button>
+                </div>
+            </div>
+        </template>
+
+        <template if:true={validateStep2}>
+            <template if:true={isParentChild}>
+
+                <c-object-Field-Selection onsubmit={getObjectFieldsHandler} combo-box-label-name="Select Parent Object">
+                </c-object-Field-Selection>
+
+            </template>
+
+            <template if:false={isParentChild}>
+
+                <c-object-Field-Selection onsubmit={getObjectFieldsHandler} combo-box-label-name="Select Object">
+                </c-object-Field-Selection>
+
+            </template>
+
+            <div class="slds-clearfix">
+                <div class="slds-align_absolute-center">
+                    <lightning-button disabled={disableSubmitButton} class="slds-p-around_medium"
+                        variant="brand-outline" label="Next" title="Next" onclick={handleNext}>
+                    </lightning-button>
+                </div>
+            </div>
+
+        </template>
+        <template if:true={validateStep2a}>
+
+            <c-object-Field-Selection onsubmit={getObjectFieldsHandler} combo-box-label-name="Select Child Object">
+            </c-object-Field-Selection>
+
+            <div class="slds-clearfix">
+                <div class="slds-align_absolute-center">
+                    <lightning-button class="slds-p-around_medium" variant="brand-outline" label="Next" title="Next"
+                        onclick={handleNext}>
+                    </lightning-button>
+                </div>
+            </div>
+
+        </template>
+       
+        <template if:true={validateStep3}>
+            <lightning-layout>
+                <lightning-layout-item padding="around-small" size="6">
+                    <p>Please Upload the filled template here to load data.</p><br>
+                    <lightning-file-upload accept={acceptedFormats} label="Attach File to Upload Data :"
+                        onuploadfinished={handleUploadFinished} record-id={recordId}></lightning-file-upload>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-small" size="6">
+
+                    <p><b>Status of Record Creation</b></p>
+                    <p class="slds-m-top_medium">Total Records in File : {totalNumOfRecords}</p>
+                    <p class="slds-m-top_medium"> Success Count : {successCount}</p>
+                    <p class="slds-m-top_medium"> Error Count : {errorCount}</p>
+                    <p>
+                        <template if:true={isErrorOccurred}>
+                            <div class="slds-p-top_medium">
+                                <lightning-button variant="brand-outline" label="Download Error Log" title="Error Log"
+                                    onclick={downloadErrorLogHandler}>
+                                </lightning-button>
+                            </div>
+                        </template>
+                    </p>
+
+                </lightning-layout-item>
+
+            </lightning-layout>
+            <div class="slds-clearfix">
+                <div class="slds-align_absolute-center">
+                    <lightning-button class="slds-p-around_medium" disabled={disableFinishButton} variant="brand" label="Finish" title="Finish"
+                        onclick={handleNext}></lightning-button>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>
