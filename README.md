@@ -1,6 +1,6 @@
 # Data Importer Lightning Web Component Application
 
-Data Importer is an LWC application which can be used to load data for Standard and Custom objects.
+Data Importer is an LWC application which can be used to load data for Standard and Custom objects.This tool allows user to select the object and its fields from UI and generates a template for data loading. This template can then be uploaded to insert data for the object.
 
 ## Table of Contents
 
