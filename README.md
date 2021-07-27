@@ -56,7 +56,7 @@ There are two ways to install Data Importer:
     sfdx force:org:open
     ```
 
-## Installing Data Importer using an Unlocked Package
+### Installing Data Importer using an Unlocked Package
 
 Follow this set of instructions if you want to deploy the app to a more permanent environment than a Scratch org or if you don't want to install the local developement tools. You can use a non source-tracked orgs such as a free [Developer Edition Org](https://developer.salesforce.com/signup) or a [Trailhead Playground](https://trailhead.salesforce.com/).
 
@@ -82,8 +82,4 @@ A quick overview of the features you can explore in Data Importer:
 
 -   Helps to upload data for both Parent and Child object without any manual intervention.
 -   Field name mapping between the csv file and the API name is not required which inturn reduces the manual effort and avoid errors.
-<<<<<<< HEAD
 -   Maintains the history of data uploads. This helps in tracking of the data loaded by any user and also the older file can be reused anytime if required.
-=======
--   Maintains the history of data uploads. This helps in tracking of the data loaded by any user and also the older file can be reused anytime if required.
->>>>>>> c0969080adbdd4f8fec2881c7487c57bccd2f7c2
