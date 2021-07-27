@@ -82,4 +82,8 @@ A quick overview of the features you can explore in Data Importer:
 
 -   Helps to upload data for both Parent and Child object without any manual intervention.
 -   Field name mapping between the csv file and the API name is not required which inturn reduces the manual effort and avoid errors.
+<<<<<<< HEAD
 -   Maintains the history of data uploads. This helps in tracking of the data loaded by any user and also the older file can be reused anytime if required.
+=======
+-   Maintains the history of data uploads. This helps in tracking of the data loaded by any user and also the older file can be reused anytime if required.
+>>>>>>> c0969080adbdd4f8fec2881c7487c57bccd2f7c2
