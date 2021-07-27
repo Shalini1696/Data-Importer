@@ -1,0 +1,51 @@
+<template>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_2-of-3">
+            <div class="slds-m-bottom_small">
+                <lightning-card title="Object Type Selection">
+                    <c-object-type-selection onradiobuttonclick={selectedRadioButtonHandler}></c-object-type-selection>
+                </lightning-card>
+            </div>
+            <div class="slds-m-vertical_small">
+                <lightning-card title="Data Template Generation">                    
+                    <div if:true={firstPageDataTemplate}>
+                        <c-object-field-selection 
+                             next-page={nextPageDataTemplate} 
+                             is-parent-child= {isParentChild} 
+                             combo-box-label-name={comboBoxLabelName} 
+                             onnextbuttonclick={nextButtonHandlerDataTemplate}></c-object-field-selection>
+                    </div>
+                    <div if:true={nextPageDataTemplate}>
+                        <c-object-field-selection 
+                            next-page={nextPageDataTemplate} 
+                            is-parent-child= {isParentChild} 
+                            combo-box-label-name="Select Child Object"></c-object-field-selection>
+                   </div>
+                </lightning-card>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+            <div class="slds-m-left_small">
+
+                <lightning-card title="Upload File & Track Progress">
+                    <div if:true={firstPageFileUpload}>
+                        <c-file-upload-component 
+                            next-page={nextPageFileUpload} 
+                            is-parent-child= {isParentChild} 
+                            combo-box-label-name={comboBoxLabelName} 
+                            onnextbuttonclick={nextButtonHandlerFileUpload}
+                            oncreaterecord={createRecordHandler}></c-file-upload-component>
+                    </div>
+                    <div if:true={nextPageFileUpload}>
+                        <c-file-upload-component 
+                            next-page={nextPageFileUpload} 
+                            is-parent-child= {isParentChild} 
+                            parent-object-name={parentObjectName}
+                            combo-box-label-name="Select Child Object"
+                            success-record-id-string={successRecordIDString}></c-file-upload-component>                        
+                    </div>
+                </lightning-card>
+            </div>
+        </div>
+    </div>
+</template>

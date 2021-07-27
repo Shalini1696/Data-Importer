@@ -1,69 +1,66 @@
 <template>
-    <lightning-card>
-        <lightning-layout>
-            <lightning-layout-item padding= "around-medium" size="5">
-               
-                <lightning-combobox name="progress" label= "{comboBoxLabelName}" value=""
-                    placeholder="Select Object Name" options= "{objNames}" onchange= "{handleObjectNameChange}" required>
-                </lightning-combobox>
+    <lightning-layout>
+        <lightning-layout-item padding="around-medium" size="6">
 
-                <template if:true={selectedObject}>
-                    <div class="slds-m-vertical_medium">
-                        <lightning-dual-listbox name="Field List" label="Select Fields" source-label="Available"
-                            selected-label="Selected" field-level-help="Required Fields will be selected automatically."
-                            options={fieldNames} required-options={requiredOptions} value={values}
-                            onchange={selectedOptionHandler}>
-                        </lightning-dual-listbox>
-                    </div>
-                </template>
-                <div class="slds-p-top_medium">
-                    <lightning-button variant="brand" label="Submit" title="Submit" onclick={submitButtonHandler}>
-                    </lightning-button>
+            <lightning-combobox name="progress" label= "{comboBoxLabelName}" value="" placeholder="Select Object Name"
+                options= "{objNames}" onchange= "{handleObjectNameChange}" required>
+            </lightning-combobox>
+
+            <div if:true={selectedObject}>
+                <div class="slds-m-vertical_medium">
+                    <lightning-dual-listbox name="Field List" label="Select Fields" source-label="Available"
+                        selected-label="Selected" field-level-help="Required Fields will be selected automatically."
+                        options={fieldNames} required-options={requiredOptions} value={values}
+                        onchange={selectedOptionHandler}>
+                    </lightning-dual-listbox>
                 </div>
-                <template if:true={isSubmitClicked}>
-                    <div class="slds-p-top_medium">
-                        
-                        <p>Please Click on <lightning-formatted-url value="#" label="Download Template" target="_blank" onclick={downloadTemplateHandler}> ></lightning-formatted-url>
-                            &nbsp; to generate template for the Selected Fields.
-                        </p>
-                    </div>
-        
-                </template>
-            
-            </lightning-layout-item>
+            </div>
 
-            <lightning-layout-item padding="around-medium" size="6">
+            <div if:true={selectedObject}>
+                <div class="slds-p-top_medium">
+                    <p>Please Click on <lightning-formatted-url value="#" label="Download Template" target="_blank"
+                            onclick={downloadTemplateHandler}> ></lightning-formatted-url>
+                        &nbsp; to generate template for the Selected Fields.
+                    </p></br>
+                </div>
+            </div>
+        </lightning-layout-item>
 
-                <div if:true={mapOfFieldTypes} class="slds-p-top_large slds-p-left_x-large">
-                    <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-border_right slds-border_left slds-table_col-bordered">
-                        <thead>
-
-                            <tr class="slds-text-title_caps">
-                                <th scope="col" class="slds-size_1-of-2">
-                                    <div title="Key">Field Name</div>
+        <lightning-layout-item padding="around-medium" size="6">
+            <div if:true={mapOfFieldTypes} class="slds-p-top_large slds-p-left_x-large">
+                <table
+                    class="slds-table slds-table_bordered slds-table_cell-buffer slds-border_right slds-border_left slds-table_col-bordered">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col" class="slds-size_1-of-2">
+                                <div title="Key">Field Name</div>
+                            </th>
+                            <th scope="col" class="slds-size_1-of-2">
+                                <div title="Value">Data Type</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={mapOfFieldTypes} for:item="keyValue">
+                            <tr key={keyValue.key}>
+                                <th scope="col">
+                                    <div>{keyValue.key}</div>
                                 </th>
-                                <th scope="col" class="slds-size_1-of-2">
-                                    <div title="Value">Data Type</div>
+                                <th scope="col">
+                                    <div>{keyValue.value}</div>
                                 </th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <template for:each={mapOfFieldTypes} for:item="keyValue">
-                                <tr key={keyValue.key}>
-                                    <th scope="col">
-                                        <div>{keyValue.key}</div>
-                                    </th>
-                                    <th scope="col">
-                                        <div>{keyValue.value}</div>
-
-                                    </th>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
-                </div>
-            </lightning-layout-item>
-
-        </lightning-layout>
-    </lightning-card>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+    <div if:true={selectedObject}>
+        <div if:true={validateNextButton}>
+            <div class="slds-clearfix slds-align_absolute-center">
+                <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext}></lightning-button>
+            </div>
+        </div>
+    </div>
 </template>

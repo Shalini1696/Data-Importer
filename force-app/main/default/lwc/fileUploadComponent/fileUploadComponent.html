@@ -1,0 +1,60 @@
+<template>
+    <div class="slds-p-around_medium">
+        <lightning-combobox label= "{comboBoxLabelName}" value="" placeholder="Select Object Name"
+            options= "{objNames}" onchange= "{handleObjectNameChange}" required>
+        </lightning-combobox></br>
+        
+        <p>Please Upload the filled template here to load data.</p><br>
+        <lightning-file-upload accept={acceptedFormats} label="Attach File to Upload Data :"
+            onuploadfinished={handleUploadFinished} record-id={recordId}>
+        </lightning-file-upload></br>
+
+        <div if:true={isFileUploaded}>
+        <p><b>Status of Record Creation</b></p></br>
+        <table
+        class="slds-table slds-table_bordered slds-table_cell-buffer slds-border_right slds-border_left slds-table_col-bordered">
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col" class="slds-size_1-of-4">
+                    <div title="Object Name">Object Name</div>
+                </th>
+                <th scope="col" class="slds-size_1-of-4">
+                    <div title="Total Records">#Records</div>
+                </th>
+                <th scope="col" class="slds-size_1-of-4">
+                    <div title="Success Count">Success#</div>
+                </th>
+                <th scope="col" class="slds-size_1-of-4">
+                    <div title="Error Count">Error#</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+           
+                <tr>
+                    <th scope="col">
+                        <div>{selectedObject}</div>
+                    </th>
+                    <th scope="col">
+                        <div>{totalNumOfRecords}</div>
+                    </th>
+                    <th scope="col">
+                        <div>{successCount}</div>
+                    </th>
+                    <th scope="col">
+                        <div>{errorCount}</div>
+                    </th>
+                </tr>
+           
+        </tbody>
+    </table></br>
+
+    <div if:true={validateNextButton}>
+        <div class="slds-clearfix slds-align_absolute-center">
+            <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext}></lightning-button>
+        </div>
+        </div>
+     
+    </div>
+</div>
+</template>

@@ -7,7 +7,9 @@ import getFieldType from '@salesforce/apex/SObjectFieldsInfo.getFieldType';
 export default class ObjectFieldSelection extends LightningElement {
     selectedObject; //Selected Object from ComboBox
     @api comboBoxLabelName = 'Select Object Name';
-    //@api isChild = false;
+    @api isParentChild = false;
+    @api nextPage = false;
+   
     objNames; //Holds all Standard & Custom object Names
     fieldNames = []; //Holds all the fields of an object
 
@@ -16,10 +18,9 @@ export default class ObjectFieldSelection extends LightningElement {
     values = [];
     requiredOptions = [];
     
-    isSubmitClicked = false;
     @track mapOfFieldTypes = [];
 
-    handleObjectNameChange(event) {
+     handleObjectNameChange(event) {
         this.selectedObject = event.detail.value;
     }
 
@@ -34,12 +35,17 @@ export default class ObjectFieldSelection extends LightningElement {
     @wire(getsObjectNames)
     wiredObjectNames({ data, error }) {
         if (data) {
-            this.objNames = [{ value: '', label: 'All Objects' }];
+            this.objNames = [{ value: '', label: '--Object Names--' }];
              data.forEach(element => {
                 const objName = {};
                 objName.label = element;
                 objName.value = element;
                 this.objNames.push(objName);
+            });
+            this.objNames.sort( ( a, b )=> {
+                a = a.label.toLowerCase();
+                b = b.label.toLowerCase();            
+                return a < b ? -1 : a > b ? 1 : 0;
             });
         }
     }
@@ -54,7 +60,12 @@ export default class ObjectFieldSelection extends LightningElement {
                 fieldName.value = element;
                 fnames.push(fieldName);
             });
-            this.fieldNames = fnames.slice();
+            this.fieldNames = fnames.slice();          
+            this.fieldNames.sort( ( a, b )=> {
+                a = a.label.toLowerCase();
+                b = b.label.toLowerCase();            
+                return a < b ? -1 : a > b ? 1 : 0;
+            });
         }
     }
 
@@ -87,20 +98,30 @@ export default class ObjectFieldSelection extends LightningElement {
     }
     
     downloadTemplateHandler(event) {
-        this.disableNextButton1 = false;
         let header = this.selected + "\n"; 
         let csvFile = document.createElement('a');
-        csvFile.href = 'data:text/csv;charset=utf-8,' + encodeURI(header);
+        csvFile.href = 'data:application/excel;base64,' + encodeURI(header);
         csvFile.target = '_blank';
-        csvFile.download = `${this.selectedObject}.csv`;
+        csvFile.download = `${this.selectedObject}.xls`;
         csvFile.click();
     }
 
-    submitButtonHandler(event){
-        const selectedEvent = new CustomEvent('submit', {
-            detail:{selectedObj:this.selectedObject} 
-          });
-        this.dispatchEvent(selectedEvent);
-        this.isSubmitClicked = true;
+    downloadErrorLogHandler(event){
+        let csvData = this.csvErrorLog;  
+        let hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvData);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = `${this.selectedObj1}_ErrorLog.csv`;
+        hiddenElement.click();
+        this.disableSubmitButton = false;
     }
+
+    handleNext(event){
+        this.dispatchEvent(new CustomEvent('nextbuttonclick'));
+    }
+    
+    get validateNextButton(){
+        return (this.isParentChild==true && this.nextPage==false) ? true : false;
+    }
+
 }
