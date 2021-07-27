@@ -1,13 +1,11 @@
 import { LightningElement } from 'lwc';
 
-export default class DataTemplateGeneration extends LightningElement {
-    
+export default class DataImporter extends LightningElement {
+
     comboBoxLabelName = 'Select Object Name';
-    selectedOption = 'option1';
-    isParentChild = false;    
     parentObjectName;
-    firstPageDataTemplate = true;
-    nextPageDataTemplate = false; 
+    firstPageFileUpload = true;
+    nextPageFileUpload = false;    
     successRecordIDString = '';
 
     selectedRadioButtonHandler(event){
@@ -25,9 +23,10 @@ export default class DataTemplateGeneration extends LightningElement {
     createRecordHandler(event){
         this.successRecordIDString = event.detail;
     }
-
-    nextButtonHandlerDataTemplate(){
-        this.nextPageDataTemplate = true;
-        this.firstPageDataTemplate = false;
+ 
+    nextButtonHandlerFileUpload(event){
+        this.parentObjectName = event.detail.parentObjectName;
+        this.nextPageFileUpload = true;
+        this.firstPageFileUpload = false;
     }
 }

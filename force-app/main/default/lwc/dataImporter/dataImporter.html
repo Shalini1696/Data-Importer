@@ -1,0 +1,24 @@
+<template>
+   
+    <div class="slds-m-bottom_small">
+        <lightning-card>
+          <c-object-type-selection onradiobuttonclick={selectedRadioButtonHandler}></c-object-type-selection>
+        </lightning-card>
+    </div>
+  
+    <div class="slds-m-bottom_small">
+        <lightning-card>
+            <div if:true={firstPageFileUpload}>
+                <c-file-upload-component next-page={nextPageFileUpload} is-parent-child={isParentChild}
+                    combo-box-label-name={comboBoxLabelName} onnextbuttonclick={nextButtonHandlerFileUpload}
+                    oncreaterecord={createRecordHandler}></c-file-upload-component>
+            </div>
+            <div if:true={nextPageFileUpload}>
+                <c-file-upload-component next-page={nextPageFileUpload} is-parent-child={isParentChild}
+                    parent-object-name={parentObjectName} combo-box-label-name="Select Child Object"
+                    success-record-id-string={successRecordIDString}></c-file-upload-component>
+            </div>
+
+        </lightning-card>
+    </div>
+</template>
