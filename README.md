@@ -13,7 +13,7 @@ Data Importer is an LWC application which can be used to load data for Standard 
 
 ## Installation Instructions
 
-There are two ways to install Easy Spaces:
+There are two ways to install Data Importer:
 
 -   [Using a Scratch Org](#installing-data-importer-using-a-scratch-org): This is the recommended installation option. Use this option if you are a developer who wants to experience the app and the code.
 -   [Using Unlocked Packages](#installing-data-importer-using-unlocked-packages): This option allows anybody to experience the sample app without installing a local development environment.
