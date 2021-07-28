@@ -58,7 +58,7 @@ There are two ways to install Easy Spaces:
     sfdx force:org:open
     ```
 	
-### Installing Easy Spaces using Unlocked Packages
+### Installing Data Importer using Unlocked Packages
 
 Follow this set of instructions if you want to deploy the app to a more permanent environment than a Scratch org or if you don't want to install the local developement tools. You can use a non source-tracked orgs such as a free [Developer Edition Org](https://developer.salesforce.com/signup) or a [Trailhead Playground](https://trailhead.salesforce.com/).
 
