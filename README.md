@@ -87,7 +87,7 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Have fun exploring!
 
-## Features
+### Features
 
 A quick overview of the features you can explore in Data Importer:
 
@@ -119,7 +119,7 @@ The following are the steps to load data for Single/ Parent & Child object.
 1.	Please select the parent object name and upload the file. Click on 'Done' in the popup window. The status of the upload will the displayed with the success and error count.
 1.  	Repeat Step 7 to upload the file for child object.
 
-## Note
+### Note
 
 -	Please create a number field in the parent object in the format objectname_key__c and keep this field in column A of parent object's template.
 -	Also, please keep the parent object reference field(Eg: AccountId) in column A of child object's template and map it with the corresponding unique key identifier provided in parent object template.
