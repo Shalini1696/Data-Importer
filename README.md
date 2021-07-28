@@ -4,12 +4,16 @@ Data Importer is an LWC application which can be used to load data for Standard 
 
 ## Table of Contents
 
--   Installation Instructions
+-   [Installation Instructions](#installation-instructions)
 
     -   [Installing Data Importer using a Scratch Org](#installing-data-importer-using-a-scratch-org)
     -   [Installing Data Importer using Unlocked Packages](#installing-data-importer-using-unlocked-packages)
 
 -   [Features](#features)
+-   [Steps for Data Loading](#steps-for-data-loading)
+	
+	-	[Single Object](#single-object)
+	-	[Parent Child Object](#parent-child-object)
 
 ## Installation Instructions
 
@@ -88,3 +92,19 @@ A quick overview of the features you can explore in Data Importer:
 -   Helps to upload data for both Parent and Child object without any manual intervention.
 -   Field name mapping between the csv file and the API name is not required which inturn reduces the manual effort and avoid errors.
 -   Maintains the history of data uploads. This helps in tracking of the data loaded by any user and also the older file can be reused anytime if required.
+
+## Steps for Data Loading
+
+The following are the steps to load data for Single/ Parent&Child object.
+
+### Single Object
+
+-	Navigate to the tab "Generate Data Template" to generate a template for the object for data loading.
+-	Select the object type.
+-	Select the object name and its fields. The field name and its datatype will be displayed for the selected fields.
+-	Please click on download template link to generate template for the selected fields.
+-	Navigate to the tab "Upload File & Track Progress" to upload the template and select the object type.
+-	Please select the object name and upload the file. Click on 'Done' in the popup window.
+-	The status of the upload will the displayed with the success and error count.
+
+### Parent Child Object
