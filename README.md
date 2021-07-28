@@ -121,6 +121,8 @@ The following are the steps to load data for Single/ Parent & Child object.
 
 ## Sample File for Parent & Child Object
 
+Parent Object: **Account**
 ![Parent Object](https://user-images.githubusercontent.com/86902550/127330318-09e08953-ed92-4fdd-aa9b-9ac930e23766.PNG)
 
+Child Object: **Contact**
 ![Child Object](https://user-images.githubusercontent.com/86902550/127330345-101b2e2a-86a7-4319-ba26-94b7df3a5c00.PNG)
