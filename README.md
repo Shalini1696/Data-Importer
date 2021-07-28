@@ -131,13 +131,13 @@ The following are the steps to load data for Single/ Parent & Child object.
 
 ### Parent & Child Object
 
-Parent Object: **Account**
+**Parent Object: Account**
 
 Here Account_Key__c is the unique key identifier which helps to map the account record with the related contacts.
 
 ![Parent Object](https://user-images.githubusercontent.com/86902550/127330318-09e08953-ed92-4fdd-aa9b-9ac930e23766.PNG)
 
-Child Object: **Contact**
+**Child Object: Contact**
 
 The parent reference(AccountId) will be replaced with the salesforce ID's during the creation of child records. Also, the child record will be created if and only if the parent record got inserted successfully without any validation errors.
 
