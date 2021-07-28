@@ -7,7 +7,7 @@ Data Importer is an LWC application which can be used to load data for Standard 
 -   [Installation Instructions](#installation-instructions)
 
     -   [Installing Data Importer using a Scratch Org](#installing-data-importer-using-a-scratch-org)
-    -   [Installing Data Importer using Unlocked Packages](#installing-data-importer-using-unlocked-packages)
+    -   [Installing Data Importer using Unlocked Package](#installing-data-importer-using-unlocked-package)
 
 -   [Features](#features)
 -   [Steps for the Data Import](#steps-for-data-loading)
@@ -64,7 +64,7 @@ There are two ways to install Data Importer:
     sfdx force:org:open
     ```
 	
-### Installing Data Importer using Unlocked Packages
+### Installing Data Importer using Unlocked Package
 
 Follow this set of instructions if you want to deploy the app to a more permanent environment than a Scratch org or if you don't want to install the local developement tools. You can use a non source-tracked orgs such as a free [Developer Edition Org](https://developer.salesforce.com/signup) or a [Trailhead Playground](https://trailhead.salesforce.com/).
 
@@ -121,7 +121,7 @@ The following are the steps to load data for Single/ Parent & Child object.
 
 ### Note
 
--	Please create a number field in the parent object in the format objectname_key__c and keep this field in column A of parent object's template.
+-	Please create a text field in the parent object in the format objectname_key__c and keep this field in column A of parent object's template.
 -	Also, please keep the parent object reference field(Eg: AccountId) in column A of child object's template and map it with the corresponding unique key identifier provided in parent object template.
 
 ## Sample File for the Data Import
