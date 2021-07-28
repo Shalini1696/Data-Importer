@@ -15,6 +15,8 @@ Data Importer is an LWC application which can be used to load data for Standard 
 	-	[Single Object](#single-object)
 	-	[Parent Child Object](#parent-child-object)
 
+-   [Sample File for the Data Import](#sample-file-for-the-data-import)
+
 ## Installation Instructions
 
 There are two ways to install Data Importer:
@@ -104,8 +106,7 @@ The following are the steps to load data for Single/ Parent & Child object.
 1.	Select the object name and its fields. The field name and its datatype will be displayed for the selected fields.
 1.	Please click on download template link to generate template for the selected fields.
 1.	Navigate to the tab "Upload File & Track Progress" to upload the template and select the object type.
-1.	Please select the object name and upload the file. Click on 'Done' in the popup window.
-1.	The status of the upload will the displayed with the success and error count.
+1.	Please select the object name and upload the file. Click on 'Done' in the popup window. The status of the upload will the displayed with the success and error count.
 
 ### Parent Child Object
 
@@ -113,13 +114,23 @@ The following are the steps to load data for Single/ Parent & Child object.
 1.	Select the object type.
 1.	Select the object name and its fields. The field name and its datatype will be displayed for the selected fields.
 1.	Please click on download template link to generate template for the selected fields.
-1.  Repeat Step 4 to generate template for child object as well.
+1.  	Repeat Step 4 to generate template for child object as well.
 1.	Navigate to the tab "Upload File & Track Progress" to upload the template and select the object type.
-1.	Please select the parent object name and upload the file. Click on 'Done' in the popup window.
-1.	The status of the upload will the displayed with the success and error count.
-1.  Repeat Step 7 and Step 8 to upload the file for child object.
+1.	Please select the parent object name and upload the file. Click on 'Done' in the popup window. The status of the upload will the displayed with the success and error count.
+1.  	Repeat Step 7 to upload the file for child object.
 
-## Sample File for Parent & Child Object
+## Note
+
+-	Please create a number field in the parent object in the format objectname_key__c and keep this field in column A of parent object's template.
+-	Also, please keep the parent object reference field(Eg: AccountId) in column A of child object's template and map it with the corresponding unique key identifier provided in parent object template.
+
+## Sample File for the Data Import
+
+## Single Object
+
+![Single Object](https://user-images.githubusercontent.com/86902550/127331818-fb3d7d66-1931-4528-bdc2-aa4c9cef0811.PNG)
+
+## Parent & Child Object
 
 Parent Object: **Account**
 
