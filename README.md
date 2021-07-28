@@ -120,8 +120,8 @@ The following are the steps to load data for Single/ Parent & Child object.
 
 ### Note
 
--	Please create a text field in the parent object in the format objectname_key__c and keep this field in the column A of parent object's template.
--	Also, please keep the parent object reference field(Eg: AccountId) in column A of child object's template and map it with the corresponding unique key identifier provided in the parent object template.
+-	Please create a text field in parent object in the following format(objectname_key__c) and keep this field in the column A of parent object's template.
+-	Also, please keep the parent object reference(Eg: AccountId) in the column A of child object's template and map it with the corresponding unique key identifier provided in the parent object's template.
 
 ## Sample File for the Data Import
 
