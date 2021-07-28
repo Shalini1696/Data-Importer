@@ -118,3 +118,9 @@ The following are the steps to load data for Single/ Parent & Child object.
 1.	Please select the parent object name and upload the file. Click on 'Done' in the popup window.
 1.	The status of the upload will the displayed with the success and error count.
 1.  Repeat Step 7 and Step 8 to upload the file for child object.
+
+## Sample File for Parent & Child Object
+
+![Parent Object](https://user-images.githubusercontent.com/86902550/127330318-09e08953-ed92-4fdd-aa9b-9ac930e23766.PNG)
+
+![Child Object](https://user-images.githubusercontent.com/86902550/127330345-101b2e2a-86a7-4319-ba26-94b7df3a5c00.PNG)
