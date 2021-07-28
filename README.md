@@ -126,11 +126,11 @@ The following are the steps to load data for Single/ Parent & Child object.
 
 ## Sample File for the Data Import
 
-## Single Object
+### Single Object
 
 ![Single Object](https://user-images.githubusercontent.com/86902550/127331818-fb3d7d66-1931-4528-bdc2-aa4c9cef0811.PNG)
 
-## Parent & Child Object
+### Parent & Child Object
 
 Parent Object: **Account**
 
