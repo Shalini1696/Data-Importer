@@ -3,7 +3,7 @@ import getsObjectNames from '@salesforce/apex/SObjectFieldsInfo.getsObjectNames'
 import uploadCSVFile from '@salesforce/apex/SingleObjectDataCreation.uploadCSVFile';
 
 export default class FileUploadComponent extends LightningElement {
-  //  @api recordId;   
+  
     @api isParentChild = false;
     @api comboBoxLabelName = 'Select Object Name';
     @api nextPage = false;
@@ -21,11 +21,10 @@ export default class FileUploadComponent extends LightningElement {
     csvErrorLog;
     successRecordIDs='';
     jsonObject;
-
+    
     get acceptedFormats() {
         return ['.csv'];
     }
-
     handleObjectNameChange(event) {       
         this.selectedObject = event.detail.value;  
     }
@@ -47,7 +46,6 @@ export default class FileUploadComponent extends LightningElement {
             });
         }
     }
-
     handleUploadFinished(event) {
         const uploadedFiles = event.detail.files;
         this.jsonObject = {
@@ -74,6 +72,15 @@ export default class FileUploadComponent extends LightningElement {
             .catch(error => {
                 console.log(JSON.stringify(error));
             })
+    }
+
+    downloadErrorLogHandler(event){
+        let csvData = this.csvErrorLog;  
+        let hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvData);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = `${this.selectedObject}_ErrorLog.csv`;
+        hiddenElement.click();       
     }
 
     handleNext(event){

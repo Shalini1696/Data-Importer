@@ -1,5 +1,6 @@
 <template>
     <lightning-layout>
+
         <lightning-layout-item padding="around-medium" size="6">
             <lightning-combobox label= "{comboBoxLabelName}" value="" placeholder="Select Object Name"
                 options= "{objNames}" onchange= "{handleObjectNameChange}" required>
@@ -10,6 +11,7 @@
                 onuploadfinished={handleUploadFinished} record-id={recordId}>
             </lightning-file-upload></br>
         </lightning-layout-item>
+
         <lightning-layout-item padding="around-medium" size="5">
             <div if:true={isFileUploaded} class="slds-p-left_medium">
                 <p><b>Status of Record Creation</b></p></br>
@@ -50,12 +52,17 @@
 
                     </tbody>
                 </table></br>
-               
+                <div if:true={isErrorOccurred} class="slds-p-top_medium">
+                    <lightning-button variant="brand-outline" label="Download Error Log" title="Error Log"
+                        onclick={downloadErrorLogHandler}>
+                    </lightning-button>
+                </div>
             </div>
+            
         </lightning-layout-item>
     </lightning-layout>
     <div if:true={isFileUploaded}>
-        <div if:true={validateNextButton} class="slds-clearfix slds-align_absolute-center">     
+        <div if:true={validateNextButton} class="slds-clearfix slds-align_absolute-center">
             <lightning-button variant="brand" label="Next" title="Next" onclick={handleNext}></lightning-button>
         </div>
     </div>

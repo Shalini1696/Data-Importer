@@ -18,8 +18,8 @@ public inherited sharing class SingleObjectDataCreation {
 		try{
 			if(idContentDocument != null) 
 			{
-				ContentVersion objVersion = [SELECT Id, VersionData FROM ContentVersion WHERE ContentDocumentId =: idContentDocument WITH SECURITY_ENFORCED];
-				List<String> csvLines = objVersion.VersionData.toString().split('\n');
+				ContentVersion cntVersion = [SELECT Id,VersionData,CreatedDate, OwnerId, Title FROM ContentVersion WHERE ContentDocumentId =: idContentDocument WITH SECURITY_ENFORCED];
+				List<String> csvLines = cntVersion.VersionData.toString().split('\n');
 				List<String> fieldNamesInHeader =  csvLines[0].split(',');
 				
 				Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(jsonObject);            
@@ -34,7 +34,8 @@ public inherited sharing class SingleObjectDataCreation {
 				totalRecords = csvLines.size() - 1;
 				dataLoadProgress.add(String.valueOf(totalRecords));		
 				List<SObject> objToCreate = parseCSVFile(csvLines,fieldNamesInHeader,objectName);		
-				dataLoadProgress = createRecord(objToCreate,dataLoadProgress);				
+				dataLoadProgress = createRecord(objToCreate,dataLoadProgress);		
+				DataImporterUploads.trackDataUploads(objectName,isChildObject,dataLoadProgress,cntVersion);
 			}
 			return dataLoadProgress;
 		}
@@ -68,8 +69,9 @@ public inherited sharing class SingleObjectDataCreation {
     */
 	public static List<SObject> parseCSVFile(List<String> csvLines,List<String> fieldNamesInHeader,String objectName){
 		List<SObject> objToCreate = new List<SObject>();
+		String[] fieldNames = fieldNamesInHeader;
 		try{
-			Map<String,Schema.SObjectField> fieldNameMap = createSObjectFieldMap(objectName);
+			Map<String,Schema.SObjectField> fieldNameMap = createSObjectFieldMap(objectName);			
 			for(Integer csvRow = 1; csvRow < csvLines.size(); csvRow++)
 			{
 				Schema.SObjectType sObjType  = Schema.getGlobalDescribe().get(objectName);
@@ -86,14 +88,26 @@ public inherited sharing class SingleObjectDataCreation {
 						}
 					}
 					SObjectField sobjfield;
+					DescribeFieldResult dfield;
+					String dataType = '';
 					if(k != fieldNamesInHeader.size() - 1){
 						sobjfield = fieldNameMap.get(fieldNamesInHeader[k]);
+						dfield = sobjfield.getDescribe();
+						dataType = String.valueOf(dfield.getType());
 					}
 					else{
-						String fname = fieldNamesInHeader[k].substring(0,fieldNamesInHeader[k].length() - 1);
+						String fname = fieldNamesInHeader[k].substring(0,fieldNamesInHeader[k].length() - 1);						
 						sobjfield = fieldNameMap.get(fname);
+						dfield = sobjfield.getDescribe();
+						dataType = String.valueOf(dfield.getType());
 					}
-					sobj.put(sobjfield,csvRowData[k]);  
+					
+					if(dataType =='DATE'){
+						sobj.put(sobjfield,Date.valueOf(csvRowData[k])); 
+					}
+					else{
+						sobj.put(sobjfield,csvRowData[k]);  
+					}					
 				}
 				objToCreate.add(sobj);    
 			}			
@@ -129,6 +143,7 @@ public inherited sharing class SingleObjectDataCreation {
                 for(Database.Error err : sr.getErrors()) {
                     errorCount++;
                     errorLog += err.getStatusCode() + ','+ err.getMessage() + ','+ err.getFields() + '\n';
+					System.debug('Error--> '+errorLog);
                 }                
             }
         }

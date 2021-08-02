@@ -100,21 +100,14 @@ export default class ObjectFieldSelection extends LightningElement {
     downloadTemplateHandler(event) {
         let header = this.selected + "\n"; 
         let csvFile = document.createElement('a');
-        csvFile.href = 'data:application/excel;base64,' + encodeURI(header);
+     //   csvFile.href = 'data:application/excel;base64,' + encodeURI(header);
+        csvFile.href = 'data:text/csv;charset=utf-8,' + encodeURI(header);
         csvFile.target = '_blank';
-        csvFile.download = `${this.selectedObject}.xls`;
+        csvFile.download = `${this.selectedObject}.csv`;
         csvFile.click();
     }
 
-    downloadErrorLogHandler(event){
-        let csvData = this.csvErrorLog;  
-        let hiddenElement = document.createElement('a');
-        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvData);
-        hiddenElement.target = '_blank';
-        hiddenElement.download = `${this.selectedObj1}_ErrorLog.csv`;
-        hiddenElement.click();
-        this.disableSubmitButton = false;
-    }
+    
 
     handleNext(event){
         this.dispatchEvent(new CustomEvent('nextbuttonclick'));

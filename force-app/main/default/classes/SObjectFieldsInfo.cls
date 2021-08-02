@@ -79,30 +79,36 @@ public inherited sharing class SObjectFieldsInfo {
         Map<String,Schema.DescribeFieldResult> fieldDescMap = new Map<String,Schema.DescribeFieldResult>();
 
         Map<String,String> fieldNameAndTypeMap = new Map<String,String>();
-        for(Schema.SObjectField sfield : mfields.Values())
-        {
-            Schema.DescribeFieldResult dfield = sfield.getDescribe();
-            String fname = String.valueOf(sfield);
-            fieldDescMap.put(fname,dfield);
-        }
-
-        for(String fieldName : selectedFieldNames){
-        String dataType = String.valueOf(fieldDescMap.get(fieldName).getType());
-            if(dataType == 'STRING'){
-                String str = fieldDescMap.get(fieldName).getType()+'('+fieldDescMap.get(fieldName).getLength()+')';
-                fieldNameAndTypeMap.put(fieldName,str);
-            }
-            else if(dataType == 'CURRENCY'){
-                Integer maxDigit = Integer.valueOf(fieldDescMap.get(fieldName).getPrecision()) - Integer.valueOf( fieldDescMap.get(fieldName).getScale());
-                String currencyLength = fieldDescMap.get(fieldName).getType()+'('+maxDigit+','+fieldDescMap.get(fieldName).getScale()+')';
-                fieldNameAndTypeMap.put(fieldName,currencyLength);
-            }
-            else{
-                String ftype = String.valueOf(fieldDescMap.get(fieldName).getType());
-                fieldNameAndTypeMap.put(fieldName,ftype);
-            }
+        try{
         
-        }
-        return fieldNameAndTypeMap;
-        }
+            for(Schema.SObjectField sfield : mfields.Values())
+            {
+                Schema.DescribeFieldResult dfield = sfield.getDescribe();
+                String fname = String.valueOf(sfield);
+                fieldDescMap.put(fname,dfield);
+            }
+
+            for(String fieldName : selectedFieldNames){         
+                String dataType = String.valueOf(fieldDescMap.get(fieldName).getType());        
+                if(dataType == 'STRING'){
+                    String str = fieldDescMap.get(fieldName).getType()+'('+fieldDescMap.get(fieldName).getLength()+')';
+                    fieldNameAndTypeMap.put(fieldName,str);
+                }
+                else if(dataType == 'CURRENCY'){
+                    Integer maxDigit = Integer.valueOf(fieldDescMap.get(fieldName).getPrecision()) - Integer.valueOf( fieldDescMap.get(fieldName).getScale());
+                    String currencyLength = fieldDescMap.get(fieldName).getType()+'('+maxDigit+','+fieldDescMap.get(fieldName).getScale()+')';
+                    fieldNameAndTypeMap.put(fieldName,currencyLength);
+                }
+                else{
+                    String ftype = String.valueOf(fieldDescMap.get(fieldName).getType());
+                    fieldNameAndTypeMap.put(fieldName,ftype);
+                }
+            
+            }
+         }
+         catch(Exception e){
+            return null;
+         }
+         return fieldNameAndTypeMap;
+    }
 }
